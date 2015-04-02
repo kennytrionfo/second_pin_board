@@ -161,6 +161,16 @@ Create a view for the show action with a new view file in views/pin:
 	<%= link_to "Back", root_path %>
 	Refresh to see.
 
+
+===============================
+==== Right Here Right Now =====
+===============================
+- page isn't rendering.
+- go back and watch vid to verify/clarify step by step instructions above. 
+- add "refresh to validate changes" to above steps a few times to this point. 
+===============================
+
+
 List out all of the pins on the index page: 
 	<% @pins.each do |pin| %>
       <h2>
