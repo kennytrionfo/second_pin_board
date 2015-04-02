@@ -1,5 +1,11 @@
 source 'https://rubygems.org'
 
+#————stuff I added————Kenny Trionfo Apr 2,2015————
+gem 'simple_form', '~> 3.0.2'
+
+
+
+
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.8'

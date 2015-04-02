@@ -96,6 +96,9 @@ Add code in new view for a form to creat a new pin:
 
 Create a form partial: 
 	In views/pins create the form partial _form.html.erb
+	In gemfile: 
+	gem 'simple_form', '~> 3.0.2'
+	bundle
 	Read documentation on simple_form
 	rails g simple_form:install --bootstrap  
 	In the form partial: 
