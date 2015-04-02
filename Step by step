@@ -128,7 +128,7 @@ Create a form partial:
 	<% end %>
 
 Add a flash message for when a new pin is created: 
-	In view/layouts, 
+	In view/layouts/application.html.erb, 
 	In the <body> tag and above the <%=yield: 
 	<% flash.each do |name, msg| %>
       <%= content_tag :div, msg, class: "alert alert-info"  %> <!-- this is bootstrap -->
@@ -149,8 +149,12 @@ Add a flash message for when a new pin is created:
 Create a view for the show action with a new view file in views/pin: 
 	show.html.erb
 	Add following to file: 
-	%h1= @pin.title
-	%p= @pin.description
+	<h1>
+		<%= @pin.title %>
+		<p>
+		<%= @pin.description %>
+		</p>
+	</h1>
 	Refresh, should see flash message "successfully created new pint" as well as title and description. 
 
 Now also in this view, add a link back to the home page (root path): 
