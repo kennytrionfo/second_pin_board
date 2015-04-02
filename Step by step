@@ -95,7 +95,7 @@ Add code in new view for a form to creat a new pin:
 	<%= link_to "Back", root_path %>
 
 Create a form partial: 
-	In view/pin create the form partial _form.html.erb
+	In views/pins create the form partial _form.html.erb
 	Read documentation on simple_form
 	rails g simple_form:install --bootstrap  
 	In the form partial: 
