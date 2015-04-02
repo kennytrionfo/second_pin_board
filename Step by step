@@ -157,7 +157,7 @@ Create a view for the show action with a new view file in views/pin:
 	</h1>
 	Refresh, should see flash message "successfully created new pint" as well as title and description. 
 
-Now also in this view, add a link back to the home page (root path): 
+	Now also in this view, add a link back to the home page (root path): 
 	<%= link_to "Back", root_path %>
 	Refresh to see.
 
