@@ -312,14 +312,15 @@ Add this to the bottom of application.scss file:
 ===============================
 
 Add navigation to views/layout/application.html.erb file. Below body tag: 
+  <nav class="navbar navbar-default">
     <div class="container">
       <div class="navbar-brand">
-        <%= link_to "Yummy Yucky", root_path %>
+        <%= link_to "Pin Board", root_path %>
       </div>
-      <% if user_signed_in? #some conditional links for if hte user is signed in. %>
+      <% if user_signed_in? %>
         <ul class="nav navbar-nav navbar-right">
           <li>
-            <%= link_to "New Dish", new_pin_path %>
+            <%= link_to "New Pin", new_pin_path %>
           </li>
           <li>
             <%= link_to "Account", edit_user_registration_path %>
@@ -339,6 +340,8 @@ Add navigation to views/layout/application.html.erb file. Below body tag:
         </ul>
       <% end %>
     </div>
+  </nav>
+     
 
 Delete this new pin link from the views/pins/index page: 
 	<%= link_to "New Pin", new_pin_path %>
@@ -407,12 +410,12 @@ Put the jquery masonry in place to auto stack things upon resizing screen:
 	
 	From documentation: add this line from the JavaScript section in application.js file under the two jquerys: 
 	//= require masonry/jquery.masonry
-	put this in pins.js.coffee:
-	->
-	$('pins').imagesLoaded ->
-	$('pins').masonry
-	 itemsSelector: '.box'
-	 isFitWidth: true
+	put this in pins.js.coffee, EXACTLY like this (coffescript is space/tab sensative:
+	$ ->
+	  $('#pins').imagesLoaded ->
+	    $('#pins').masonry
+	      itemSelector: '.box'
+	      isFitWidth: true
 	
 	Enable transitions in index.html.erb: 
 	Should end up like this: 

@@ -1,21 +1,21 @@
 <!DOCTYPE html>
-<html>
+<html></html>
 <head>
-  <title>SecondPinBoard</title>
+  <title>Pin Board</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-<div class="container">
+  <nav class="navbar navbar-default">
+    <div class="container">
       <div class="navbar-brand">
-        <%= link_to "Yummy Yucky", root_path %>
+        <%= link_to "Pin Board", root_path %>
       </div>
-      <% if user_signed_in? #some conditional links for if hte user is signed in. %>
+      <% if user_signed_in? %>
         <ul class="nav navbar-nav navbar-right">
           <li>
-            <%= link_to "New Dish", new_pin_path %>
+            <%= link_to "New Pin", new_pin_path %>
           </li>
           <li>
             <%= link_to "Account", edit_user_registration_path %>
@@ -35,12 +35,16 @@
         </ul>
       <% end %>
     </div>
+  </nav>
 
-<% flash.each do |name, msg| %>
-      <%= content_tag :div, msg, class: "alert alert-info"  %> <!-- this is bootstrap -->
-<% end %>
+  <div class="container">
+    <% flash.each do |name, msg| %>
+      <%= content_tag :div, msg, class: "alert alert-info" %>
+    <% end %>
 
-<%= yield %>
+    <%= yield %>
+    
+  </div>
 
 </body>
-</html>
+
