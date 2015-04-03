@@ -2,6 +2,10 @@
 This is to reproduce a clean pin_board as the first got changed so much that I can't see how the masonry jquery gem is used for the pins anymore. 
 The first pin_board is on the work laptop, this one is on home mac. 
 
+
+ToDos:
+Change the devise notices for sucessful login, logout etc to be custom. 
+
       LOG TIME  ! ! !  ! !
 
 Create a new rails app called pin_board that uses postgres db and skips installing test::unit. 
@@ -303,13 +307,6 @@ Add this to the bottom of application.scss file:
 	//= require bootstrap-sprockets
 	Refresh
 	Commit
-
-===============================
-==== Right Here Right Now =====
-===============================
--Add time. 
--Redo this freaking app 3 times. 
-===============================
 
 Add navigation to views/layout/application.html.erb file. Below body tag: 
   <nav class="navbar navbar-default">
@@ -627,24 +624,25 @@ Now, pretty up the forms a bit.
 		    </div>
 		    <div class="panel-body">
 		      <%= render 'form' %>
+		      <%= link_to "Back", root_path %>
 		    </div>
 		  </div>
 		</div>
 
+===============================
+==== Right Here Right Now =====
+===============================
+-Add time. 
+-Redo this freaking app 3 times. 
+===============================
+
 Now pretty up edit form for editing one's account: 
 	Under views/devise/registration/edit.html.erb, 
-	Kept the file in erb and add some things. (This was a lot of editing. I just copy code from hit github and pasted to make it work.)
+	Kept the file in erb and add some things. (This was a lot of editing. I just copy code from  github and pasted to make it work.)
 	Also copied the code for the edit a pin page, sign up and sign in pages. 
 
+
 ------End of regular------
-
-
----------
-these are things i've been patching. 
-I have to go back in here later and put these above in the order they need to be in to make this complete.  
---------------------------
-
-Change the devise notices for sucessful login, logout etc to be custom. 
 
 
       LOG TIME  ! ! !  ! !
