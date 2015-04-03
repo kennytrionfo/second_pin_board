@@ -287,12 +287,12 @@ Make sure that each pin will be assigned to a user.
 	@pin.save 
 	
 Add code to display the user's email to each pin:
-	In show.html.haml file: 
+	In show.html.erb file: 
 	<p></p>
 	Submitted by
 	<%= @pin.user.email %>
 	<br/>
-	Refresh and see. 
+	Refresh and see error cuz we don't have a pin.user.email so: 
 
 Update the code in the pins_controller to attach a pin with a current user: 
 	In pins_controller, change the @pin.new in both the new and the create actions to: 
