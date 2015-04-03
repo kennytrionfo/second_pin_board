@@ -226,18 +226,21 @@ Create a new file for the edit page and code for an edit form:
  
 Add a link_to form on the show page like this: 
 	<%= link_to "Edit", edit_pin_path %>
-	<% add code in the destroy action to delete a pin & redirect to main index page:  %>
+	Refresh
+	Add code in the destroy action to delete a pin & redirect to main index page: 
 	  @pin.destroy
 	  redirect_to root_path
-	<% end %>
+	
 
 Now add delete button on show page: 
 	In views/show:
 	<%= link_to "Delete", pin_path, method: :delete, data: {confirm: "Are you sure?"} %>
+	Refresh
 
 Add a "new" button on the index page:
 	In views/index:
-	<%= link_to "New Pin", new_ %>
+	<%= link_to "New Pin", new_pin_path %>
+	Refresh
 
 Add devise gem: 
 	gem 'devise', '~> 3.4.1'
