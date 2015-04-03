@@ -103,6 +103,8 @@ List all of the pins on the index page:
 	@pins = Pin.all.order("created_at DESC")
 	refresh
 
+	Add edit, update and destroy actions in PinsController
+
 Create a form partial: 
 	In views/pins create the form partial _form.html.erb
 	In gemfile: 
@@ -133,9 +135,9 @@ Create a form partial:
 	  </div>
 	  <%= f.button :submit, class: "btn btn-primary" %>
 	<% end %>
-	Refresh in browser localhost:3000/pins/new
+	Refresh in browser localhost:3000/pins/new, should see form. 
 
-	In the pins controller, update action, add: 
+	In the pins controller, create action, add: 
 		if @pin.save
 			redirect_to @pin, notice: "Successfully created new Pin"
 		else
@@ -182,9 +184,7 @@ Create a view for the show action with a new view file in views/pin:
 ===============================
 ==== Right Here Right Now =====
 ===============================
-- page isn't rendering.
-- go back and watch vid to verify/clarify step by step instructions above. 
-- add "refresh to validate changes" to above steps a few times to this point. 
+
 ===============================
 
 
@@ -195,8 +195,15 @@ List out all of the pins on the index page:
       </h2>
   	<% end %>
   	Refresh and see NoMethodError in Pins#index cuz it's not defined in the controller. 
+  	So in PinsController, index action, add: 
+  		@pins = Pin.all.order("created_at DESC")
 
-Add update and destroy actions/methods to pin controller: 
+
+Add edit, update and destroy actions/methods to pin controller: 
+			def edit
+			
+			end
+			
 			def update
 				if @pin.update(pin_params)
 					redirect_to @pin, notice: "Pin was Successfully updated"
@@ -215,7 +222,7 @@ Create a new file for the edit page and code for an edit form:
 	Add code: 
 	<h1>Edit Pin</h1>
 	<%= render 'form' %>
-	<%= link_to "Cancel", pin %>
+	<%= link_to "Cancel", pin_path %>
  
 Add a link_to form on the show page like this: 
 	<%= link_to "Edit", edit_pin_path %>
