@@ -180,14 +180,6 @@ Create a view for the show action with a new view file in views/pin:
 	<%= link_to "Back", root_path %>
 	Refresh to see.
 
-
-===============================
-==== Right Here Right Now =====
-===============================
-
-===============================
-
-
 List out all of the pins on the index page: 
 	<% @pins.each do |pin| %>
       <h2>
@@ -199,7 +191,6 @@ List out all of the pins on the index page:
   		@pins = Pin.all.order("created_at DESC")
 
   	Commit
-
 
 Add edit, update and destroy actions/methods to pin controller: 
 			def edit
@@ -299,7 +290,10 @@ Update the code in the pins_controller to attach a pin with a current user:
 	current_user.pins.build
 
 Start BOOTSTRAP stuff here: 
-
+	Install the gem in Gemfile: 
+	gem 'bootstrap-sass', '3.2.0.2'
+	bundle
+	restart server
 	Follow online documentation and Configure bootstrap:
 	Add .scss to app/assests/stylesheets/application.css  
 
@@ -309,6 +303,15 @@ Add this to the bottom of application.scss file:
 	Refresh to see new styling 
 	Add this to the application.js file under the two jquery lines: 
 	//= require bootstrap-sprockets
+	Refresh
+	Commit
+
+===============================
+==== Right Here Right Now =====
+===============================
+-Add time. 
+-Redo this freaking app 3 times. 
+===============================
 
 Add navigation to application.html.erb file. Below body tag: 
     <div class="container">
