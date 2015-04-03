@@ -36,11 +36,6 @@ Install Gems
 	bundle 
 
 
-
-Took out restaurant model info here. shold be good form here. 
-
-
-
 Create a Pin model with a title that's a string and a description that's text: 
 	In console: 
 	rails g model Pin title:string description:text 	
@@ -66,6 +61,8 @@ Put all the resources in the routes file as well as make the root path point to 
 Create a new file for the index view: 
 	In app/views/pin create new file called:
 	index.html.erb
+	and put in a simple: 
+	<h1>This is the index placeholder</h1>
 
 Create the new and create CRUD actions in pins_controller.rb 
 	Start wtih this: 
@@ -85,7 +82,7 @@ Create the new and create CRUD actions in pins_controller.rb
 	end
 
 Create a view for creating a new pin: 
-	In app/views/pin: 
+	In app/views/pins: 
 	new.html.erb
 
 Add code in new view for a form to creat a new pin: 
@@ -93,6 +90,18 @@ Add code in new view for a form to creat a new pin:
 	<h1>New Form</h1>
 	<%= render 'form' %>
 	<%= link_to "Back", root_path %>
+
+List all of the pins on the index page: 
+	Go back to views/pins/index.html.erb and add: 
+	<% @pins.each do |pin| %>
+	  <h2>
+	    <%= link_to pin.title, pin %>
+	  </h2>
+	<% end %>
+	Refresh, should still get no method error in Pins#index error 
+	So now add the following to the index method in the PinsController:
+	@pins = Pin.all.order("created_at DESC")
+	refresh
 
 Create a form partial: 
 	In views/pins create the form partial _form.html.erb
@@ -103,7 +112,7 @@ Create a form partial:
 	rails g simple_form:install --bootstrap  
 	In the form partial: 
 	<%= simple_form_for @pin, html: {multipart: true} do |f| %>
-	  <% if @pin.errors.any?  %>
+	  <%= if @pin.errors.any?  %>
 	    <div id="errors"></div>
 	    <h2></h2>
 	    <%= pluralize(@pin.errors.count, "error") %>
@@ -115,9 +124,7 @@ Create a form partial:
 	      </li>
 	    <% end %>
 	  <% end %>
-	  <div class="form-group">
-	    <%= f.input :image, input_html: { class: 'form-control'} %>
-	  </div>
+	  
 	  <div class="form-group">
 	    <%= f.input :title, input_html: { class: 'form-control'} %>
 	  </div>
@@ -126,6 +133,16 @@ Create a form partial:
 	  </div>
 	  <%= f.button :submit, class: "btn btn-primary" %>
 	<% end %>
+	Refresh in browser localhost:3000/pins/new
+
+	In the pins controller, update action, add: 
+		if @pin.save
+			redirect_to @pin, notice: "Successfully created new Pin"
+		else
+			render 'new'
+		end
+
+		refresh
 
 Add a flash message for when a new pin is created: 
 	In view/layouts/application.html.erb, 
