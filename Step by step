@@ -238,7 +238,7 @@ Add a "new" button on the index page:
 
 	Commit
 
-Add users by adding the devise gem: 
+Add users by adding the DEVISE gem: 
 	gem 'devise', '~> 3.3.0'
 	bundle
 	Restart server
@@ -342,7 +342,6 @@ Add navigation to views/layout/application.html.erb file. Below body tag:
     </div>
   </nav>
      
-
 Delete this new pin link from the views/pins/index page: 
 	<%= link_to "New Pin", new_pin_path %>
 	since we already have one in the nav now. 
@@ -576,7 +575,7 @@ Style up the show page with various. should look like this:
 	  </div>
 	</div>
 	
-Add the ability to vote on a pin. 
+Add the ability to vote on a pin: 
 	Insert acts-as-votable gem: 
 	gem 'acts_as_votable', '~> 0.10.0'
 	bundle install & restart server
@@ -603,7 +602,7 @@ Create some nested routes for upvoting:
 	end
 	below the destroy block.
 
-In show page add a link_to under the last btn-group.. like so: 
+In show page add a link_to under the last btn-group for upvotes like so: 
 	<div class="btn-group pull-right">
 	  <%= link_to like_pin_path(@pin), method: :put, class: "btn btn-default" do  %>
 	    <span class="glyphicon glyphicon-heart">
