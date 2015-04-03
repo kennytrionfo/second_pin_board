@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 #————stuff I added————Kenny Trionfo Apr 2,2015————
 gem 'simple_form', '~> 3.0.2'
-
+gem 'devise', '~> 3.3.0'
 
 
 

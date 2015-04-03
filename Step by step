@@ -198,6 +198,8 @@ List out all of the pins on the index page:
   	So in PinsController, index action, add: 
   		@pins = Pin.all.order("created_at DESC")
 
+  	Commit
+
 
 Add edit, update and destroy actions/methods to pin controller: 
 			def edit
@@ -223,6 +225,8 @@ Create a new file for the edit page and code for an edit form:
 	<h1>Edit Pin</h1>
 	<%= render 'form' %>
 	<%= link_to "Cancel", pin_path %>
+
+	Commit
  
 Add a link_to form on the show page like this: 
 	<%= link_to "Edit", edit_pin_path %>
@@ -230,7 +234,8 @@ Add a link_to form on the show page like this:
 	Add code in the destroy action to delete a pin & redirect to main index page: 
 	  @pin.destroy
 	  redirect_to root_path
-	
+
+	Commit	
 
 Now add delete button on show page: 
 	In views/show:
@@ -242,8 +247,12 @@ Add a "new" button on the index page:
 	<%= link_to "New Pin", new_pin_path %>
 	Refresh
 
-Add devise gem: 
-	gem 'devise', '~> 3.4.1'
+	Commit
+
+Add users by adding the devise gem: 
+	gem 'devise', '~> 3.3.0'
+	bundle
+	Restart server
 	Follow devise documentation instructions online: 
 	rails g devise:install
 	1. in development.rb file: 
@@ -255,6 +264,7 @@ Add devise gem:
 	rake db:migrate
 	Restart server 
 	try localhost:3000/users/sign_up
+	Commit
 
 Try a branch here?: 
 	With: 
