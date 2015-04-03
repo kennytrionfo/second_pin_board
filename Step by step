@@ -405,7 +405,7 @@ Put the jquery masonry in place to auto stack things upon resizing screen:
 	gem 'masonry-rails', '~> 0.2.1'
 	and bundle
 	
-	In documentation: add line from the JavaScript section in JS file under jquery: 
+	From documentation: add this line from the JavaScript section in application.js file under the two jquerys: 
 	//= require masonry/jquery.masonry
 	put this in pins.js.coffee:
 	->
@@ -414,9 +414,9 @@ Put the jquery masonry in place to auto stack things upon resizing screen:
 	 itemsSelector: '.box'
 	 isFitWidth: true
 	
-	Enable transitions in index: 
+	Enable transitions in index.html.erb: 
 	Should end up like this: 
-	pins.transitions-enabled
+	<div class="transitions-enabled" id="pins">
 		<% @pins.each do |pin| %>
 		  <div class="box panel panel-default">
 		    <%= link_to (image_tag pin.image.url(:medium)), pin %>
@@ -427,9 +427,112 @@ Put the jquery masonry in place to auto stack things upon resizing screen:
 		    </div>
 		  </div>
 		<% end %>
+	</div>
 
 	To application.css.scss file above require tree add:  
 	*= require 'masonry/transitions'
+	rails s
+	refresh
+	commit
+
+Paste in the styles from this github repo. it's also here. just paste into the bottom of applicatin.css.scss:
+	body {
+		background: #E9E9E9;
+	}
+
+	h1, h2, h3, h4, h5, h6 {
+		font-weight: 100;
+	}
+
+	nav {
+		box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);
+		.navbar-brand {
+			a {
+				color: #BD1E23;
+				font-weight: bold;
+				&:hover {
+					text-decoration: none;
+				}
+			}
+		}
+	}
+
+	#pins {
+	  margin: 0 auto;
+	  width: 100%;
+	  .box {
+		  margin: 10px;
+		  width: 350px;
+		  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);
+		  border-radius: 7px;
+		  text-align: center;
+		  img {
+		  	max-width: 100%;
+		  	height: auto;
+		  }
+		  h2 {
+		  	font-size: 22px;
+		  	margin: 0;
+		  	padding: 25px 10px;
+		  	a {
+					color: #474747;
+		  	}
+		  }
+		  .user {
+		  	font-size: 12px;
+		  	border-top: 1px solid #EAEAEA;
+				padding: 15px;
+				margin: 0;
+		  }
+		}
+	}
+
+	#edit_page {
+		.current_image {
+			img {
+				display: block;
+				margin: 20px 0;
+			}
+		}
+	}
+
+	#pin_show {
+		.panel-heading {
+			padding: 0;
+		}
+		.pin_image {
+			img {
+				max-width: 100%;
+				width: 100%;
+				display: block;
+				margin: 0 auto;
+			}
+		}
+		.panel-body {
+			padding: 35px;
+			h1 {
+				margin: 0 0 10px 0;
+			}
+			.description {
+				color: #868686;
+				line-height: 1.75;
+				margin: 0;
+			}
+		}
+		.panel-footer {
+			padding: 20px 35px;
+			p {
+				margin: 0;
+			}
+			.user {
+				padding-top: 8px;
+			}
+		}
+	}
+
+	textarea {
+		min-height: 250px;
+	}
 
 Style up the show page with various. should look like this:
 	<div class="row" id="pin_show">
