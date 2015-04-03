@@ -366,6 +366,8 @@ ADD THE ABILITY TO UPLOAD IMAGES.
 	validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
 	Run the migration (using generator) that it tells you to in documentation. For us, this will be: 
 		rails g paperclip pin image
+	rake db:migrate
+	commit
 
 Add paperclip to form also. 
 	Under views/pin/_form.html.erb:
@@ -373,15 +375,24 @@ Add paperclip to form also.
   			<%= f.input :image, input_html: { class: 'form-control'} %>
 		</div>
 	above the other divs. 
-	rake db:migrate
+	rake db:migrate?
+	refresh, try to add an image, 
+	commit
 
 	In pins controller add: 
 	:image
 	to the pin_params behind :description
 	
-	Add this to top of show.html.erb: 
+	Add image tag to top of show page and edit page:
+		In show.html.erb: 
 		<%= image_tag @pin.image.url(:medium) %>
-		<% change index view to this:  %>
+
+		Then show the user which image they are editing when they are editing it. 
+		In edit.html.erb, above = render 'form' add: 
+	   	<%= image_tag @pin.image.url(:medium) %>	
+
+Add the image tag to the pins on the index page:
+	views/index.html.erb, change code to this: 
 		<% @pins.each do |pin| %>
 		  <%= link_to (image_tag pin.image.url(:medium)), pin %>
 		  <h2>
@@ -389,10 +400,6 @@ Add paperclip to form also.
 		  </h2>
 		<% end %>
 
-Show the user which image they are editing when they are editing it. 
-		In edit.html.erb, above = render 'form' add: 
-	   	<%= image_tag @pin.image.url(:medium) %>
-	
 Put the jquery masonry in place to auto stack things upon resizing screen: 
 	in gemfile, put 
 	gem 'masonry-rails', '~> 0.2.1'
