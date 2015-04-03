@@ -303,11 +303,11 @@ Start BOOTSTRAP stuff here:
 	Follow online documentation and Configure bootstrap:
 	Add .scss to app/assests/stylesheets/application.css  
 
-Add this to the file: 
+Add this to the bottom of application.scss file: 
 	@import "bootstrap-sprockets";
 	@import "bootstrap"; 
 	Refresh to see new styling 
-	Add this to the application.js file: 
+	Add this to the application.js file under the two jquery lines: 
 	//= require bootstrap-sprockets
 
 Add navigation to application.html.erb file. Below body tag: 
