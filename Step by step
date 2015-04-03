@@ -4,7 +4,6 @@ The first pin_board is on the work laptop, this one is on home mac.
 
       LOG TIME  ! ! !  ! !
 
-
 Create a new rails app called pin_board that uses postgres db and skips installing test::unit. 
 	In console: 
 	rails new pin_board -d postgresql --skip-test-unit
@@ -34,7 +33,6 @@ Install Gems
 	? minitest-rails?
 	? debugger ? 
 	bundle 
-
 
 Create a Pin model with a title that's a string and a description that's text: 
 	In console: 
@@ -313,7 +311,7 @@ Add this to the bottom of application.scss file:
 -Redo this freaking app 3 times. 
 ===============================
 
-Add navigation to application.html.erb file. Below body tag: 
+Add navigation to views/layout/application.html.erb file. Below body tag: 
     <div class="container">
       <div class="navbar-brand">
         <%= link_to "Yummy Yucky", root_path %>
