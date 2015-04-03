@@ -360,11 +360,11 @@ ADD THE ABILITY TO UPLOAD IMAGES.
 	bundle install and restart server
 	Read paperclip documentation
 	Install imagemagic
-	In quickstart section, add the has_attached_file and validates_attachment_content_type to the pin: 
+	From the quickstart section in documentation, add the has_attached_file and validates_attachment_content_type to the pin: 
 	Add following to pin.rb (this is copied from paperclip gem but changed for our needs):
 	has_attached_file :image, styles: { :medium => "300x300>" }
-	  	validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
-	Run the migration that it tells you to in gem: 
+	validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
+	Run the migration (using generator) that it tells you to in documentation. For us, this will be: 
 		rails g paperclip pin image
 
 Add paperclip to form also. 
