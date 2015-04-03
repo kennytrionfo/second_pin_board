@@ -339,13 +339,20 @@ Add navigation to views/layout/application.html.erb file. Below body tag:
         </ul>
       <% end %>
     </div>
-	
+
+Delete this new pin link from the views/pins/index page: 
+	<%= link_to "New Pin", new_pin_path %>
+	since we already have one in the nav now. 
+	refresh
+	commit
+
 Add a wrapper around the new pin form. 
 	In new.html.erb, add:
 	<div class="col-md-6 col-md-offset-3">
 	with <div/> at the end of it. 
 	
 	Do same thing to edit page.
+	refresh, commit
 
 ADD THE ABILITY TO UPLOAD IMAGES.
 	Add paperclip gem:
