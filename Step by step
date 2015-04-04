@@ -657,6 +657,7 @@ Now, pretty up the forms a bit.
 -Add a yummy yucky attribute to pins. 
 -James - help me find and change the "missing" word on the cards on the pins index page when there is no picture. 
 -James - help me find where I change the css so that the image has some padding right it too so it looks like it's in the card. 
+-Make the signed in, new pin, signed out notices fade after showing and not change the page also upon refresh. 
 -Redo this freaking app 3 times. 
 ===============================
 
