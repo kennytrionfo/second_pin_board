@@ -609,6 +609,11 @@ In show page add a link_to under the last btn-group for upvotes like so:
 	</div>
 	Add right below this: 
 	- if user_signed_in?
+
+Add a welcome page and make it the index: 
+	In views/pins/ create a welcome.html.erb page. 
+	Put a simple "Welcome to Yummy Yucky" on it. 
+	In routes.rb, change root "pins#index" to "pins#welcome"
 	
 Add authenticate so users who aren't signed in can't do anything. below the first before_action in the pins_controller, add: 
 	before_action :authenticate_user!, except: [:index, :show]
@@ -634,10 +639,15 @@ Now, pretty up the forms a bit.
 ==== Right Here Right Now =====
 ===============================
 -Add time. 
+-
+-Add a not-logged-in landing page other than the index and make that the root. Add to steps. 
+-Make it so if you are not logged in, the home page is the not-logged-in landing page and if you are, the home page is the pins index page. 
+-James - help me find and change the "missing" word on the cards on the pins index page when there is no picture. 
+-James - help me find where I change the css so that the image has some padding right it too so it looks like it's in the card. 
 -Redo this freaking app 3 times. 
 ===============================
 
-Now pretty up the devise acount edit form for editing one's account: 
+Now pretty up the devise acount edit form for editing one's account under: 
 	Under views/devise/registration/edit.html.erb, changed to this:
 	<div class="col-md-8 col-md-offset-2">
 	  <div class="row">
