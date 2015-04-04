@@ -614,6 +614,16 @@ Add a welcome page and make it the index:
 	In views/pins/ create a welcome.html.erb page. 
 	Put a simple "Welcome to Yummy Yucky" on it. 
 	In routes.rb, change root "pins#index" to "pins#welcome"
+
+Add a link on the navbar to take you to the pins index page: 
+	In views/layouts/application.html.erb, above the other links in the nav add: 
+	<li>
+		<%= link_to "Pins", pins_path %>
+	</li>
+
+
+
+Make it so if not logged in, only see... 
 	
 Add authenticate so users who aren't signed in can't do anything. below the first before_action in the pins_controller, add: 
 	before_action :authenticate_user!, except: [:index, :show]
