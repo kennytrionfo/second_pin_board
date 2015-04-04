@@ -637,10 +637,133 @@ Now, pretty up the forms a bit.
 -Redo this freaking app 3 times. 
 ===============================
 
-Now pretty up edit form for editing one's account: 
-	Under views/devise/registration/edit.html.erb, 
-	Kept the file in erb and add some things. (This was a lot of editing. I just copy code from  github and pasted to make it work.)
-	Also copied the code for the edit a pin page, sign up and sign in pages. 
+Now pretty up the devise acount edit form for editing one's account: 
+	Under views/devise/registration/edit.html.erb, changed to this:
+	<div class="col-md-8 col-md-offset-2">
+	  <div class="row">
+	    <div class="panel panel-default">
+	      <div class="panel-heading">
+	        <h2>Edit Your Account</h2>
+	      </div>
+
+	      <div class="panel-body">
+	        <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+	          <%= devise_error_messages! %>
+
+	          <div class="form-group">
+	            <%= f.label :email %><br />
+	            <%= f.email_field :email, autofocus: true, class: "form-control" %>
+	          </div>
+
+	          <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+	            <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+	          <% end %>
+
+	          <div class="form-group">
+	            <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+	            <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
+	          </div>
+
+	          <div class="form-group">
+	            <%= f.label :password_confirmation %><br />
+	            <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control" %>
+	          </div>
+
+	          <div class="form-group">
+	            <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
+	            <%= f.password_field :current_password, autocomplete: "off", class: "form-control" %>
+	          </div>
+
+	          <div class="form-group">
+	            <%= f.submit "Update", class: "btn btn-primary" %>
+	          </div>
+	        <% end %>
+	      </div>
+
+	      <div class="panel-footer">
+	        <h3>Cancel my account</h3>
+
+	        <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-default" %></p>
+	        <br>
+	        <%= link_to "Back", :back, class: "btn btn-default" %>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
+Now pretty up the sign up page in devise/sessions/new with: 
+	<div class="col-md-8 col-md-offset-2">
+	  <div class="row">
+	    <div class="panel panel-default">
+	      <div class="panel-heading">
+					<h2>Sign In</h2>
+				</div>
+
+				<div class="panel-body">
+					<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+				  	<div class="form-group">
+				  		<%= f.label :email %><br />
+				  		<%= f.email_field :email, autofocus: true, class: "form-control" %>
+				  	</div>
+
+				  	<div class="form-group">
+				  		<%= f.label :password %><br />
+				    	<%= f.password_field :password, autocomplete: "off", class: "form-control" %>
+				    </div>
+
+				  <% if devise_mapping.rememberable? -%>
+				    <div class="form-group">
+				    	<%= f.check_box :remember_me %> <%= f.label :remember_me %>
+				    </div>
+				  <% end -%>
+
+				  <div class="form-group">
+				  	<%= f.submit "Log in", class: "btn btn-primary" %>
+				  </div>
+				<% end %>
+
+				<%= render "devise/shared/links" %>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+Pretty up sign in page in devise/sessions/new with:  
+	<div class="col-md-8 col-md-offset-2">
+	  <div class="row">
+	    <div class="panel panel-default">
+	      <div class="panel-heading">
+					<h2>Sign In</h2>
+				</div>
+
+				<div class="panel-body">
+					<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+				  	<div class="form-group">
+				  		<%= f.label :email %><br />
+				  		<%= f.email_field :email, autofocus: true, class: "form-control" %>
+				  	</div>
+
+				  	<div class="form-group">
+				  		<%= f.label :password %><br />
+				    	<%= f.password_field :password, autocomplete: "off", class: "form-control" %>
+				    </div>
+
+				  <% if devise_mapping.rememberable? -%>
+				    <div class="form-group">
+				    	<%= f.check_box :remember_me %> <%= f.label :remember_me %>
+				    </div>
+				  <% end -%>
+
+				  <div class="form-group">
+				  	<%= f.submit "Log in", class: "btn btn-primary" %>
+				  </div>
+				<% end %>
+
+				<%= render "devise/shared/links" %>
+				</div>
+			</div>
+		</div>
+	</div>
 
 
 ------End of regular------
