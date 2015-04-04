@@ -621,6 +621,7 @@ Add a link on the navbar to take you to the pins index page:
 		<%= link_to "Pins", pins_path %>
 	</li>
 
+Make it so that after signing in, you land on the pins index page instead of the welcome page. 
 
 
 Make it so if not logged in, only see... 
@@ -649,9 +650,11 @@ Now, pretty up the forms a bit.
 ==== Right Here Right Now =====
 ===============================
 -Add time. 
+-Make it so that after you signup or log back in, you are redirected to the pins index page, not the landing page.  
+-Add a restaurant model with a controller, crud actions, views and routes and then connect restaurants to a user pins to a restaurant. 
 -
--Add a not-logged-in landing page other than the index and make that the root. Add to steps. 
--Make it so if you are not logged in, the home page is the not-logged-in landing page and if you are, the home page is the pins index page. 
+
+-Add a yummy yucky attribute to pins. 
 -James - help me find and change the "missing" word on the cards on the pins index page when there is no picture. 
 -James - help me find where I change the css so that the image has some padding right it too so it looks like it's in the card. 
 -Redo this freaking app 3 times. 
