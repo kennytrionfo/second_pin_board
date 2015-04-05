@@ -2,11 +2,20 @@
 This is to reproduce a clean pin_board as the first got changed so much that I can't see how the masonry jquery gem is used for the pins anymore. 
 The first pin_board is on the work laptop, this one is on home mac. 
 
-
-ToDos:
-Change the devise notices for sucessful login, logout etc to be custom. 
-
-      LOG TIME  ! ! !  ! !
+===============================
+==== Right Here Right Now =====
+===============================
+-Log time. 
+-push these notes. I've made some offline additions. 
+-Make it so that after you signup or log back in, you are redirected to the pins index page, not the landing page.  
+-Add a restaurant model with a controller, crud actions, views and routes and then connect restaurants to a user pins to a restaurant. 
+-Change the devise notices for sucessful login, logout etc to be custom. 
+-Add a yummy yucky attribute to pins. 
+-James - help me find and change the "missing" word on the cards on the pins index page when there is no picture. 
+-James - help me find where I change the css so that the image has some padding right it too so it looks like it's in the card. 
+-Make the signed in, new pin, signed out notices fade after showing and not change the page also upon refresh. 
+-Redo this freaking app 3 times. 
+===============================
 
 Create a new rails app called pin_board that uses postgres db and skips installing test::unit. 
 	In console: 
@@ -86,9 +95,8 @@ Create the new and create CRUD actions in pins_controller.rb
 Create a view for creating a new pin: 
 	In app/views/pins: 
 	new.html.erb
-
-Add code in new view for a form to creat a new pin: 
-	In the new.html.erb file: 
+	
+	Add code in new view for a form to create a new pin: 
 	<h1>New Form</h1>
 	<%= render 'form' %>
 	<%= link_to "Back", root_path %>
@@ -107,7 +115,7 @@ List all of the pins on the index page:
 
 	Add edit, update and destroy actions in PinsController
 
-Create a form partial: 
+Create a form partial for creating a new pin: 
 	In views/pins create the form partial _form.html.erb
 	In gemfile: 
 	gem 'simple_form', '~> 3.0.2'
@@ -167,7 +175,7 @@ Add a flash message for when a new pin is created:
 	Then at top add following before action: 
 	before_action :find_pin, only: [:show, :edit, :update, :destroy]
 
-Create a view for the show action with a new view file in views/pin: 
+Create a view for the show action with a new show file in views/pin: 
 	show.html.erb
 	Add following to file: 
 	<h1>
@@ -178,7 +186,7 @@ Create a view for the show action with a new view file in views/pin:
 	</h1>
 	Refresh, should see flash message "successfully created new pint" as well as title and description. 
 
-	Now also in this view, add a link back to the home page (root path): 
+	Also add a link back to the home page (root path): 
 	<%= link_to "Back", root_path %>
 	Refresh to see.
 
@@ -195,23 +203,23 @@ List out all of the pins on the index page:
   	Commit
 
 Add edit, update and destroy actions/methods to pin controller: 
-			def edit
-			
-			end
-			
-			def update
-				if @pin.update(pin_params)
-					redirect_to @pin, notice: "Pin was Successfully updated"
-				else
-					render 'edit'
-				end
-			end
+	def edit
+	
+	end
+	
+	def update
+		if @pin.update(pin_params)
+			redirect_to @pin, notice: "Pin was Successfully updated"
+		else
+			render 'edit'
+		end
+	end
 
-			def destroy
+	def destroy
 
-			end
+	end
 
-Create a new file for the edit page and code for an edit form: 
+Create an edit view: 
 	Create new file in views/pins called:
 	edit.html.erb 
 	Add code: 
@@ -622,9 +630,6 @@ Add a link on the navbar to take you to the pins index page:
 	</li>
 
 Make it so that after signing in, you land on the pins index page instead of the welcome page. 
-
-
-Make it so if not logged in, only see... 
 	
 Add authenticate so users who aren't signed in can't do anything. below the first before_action in the pins_controller, add: 
 	before_action :authenticate_user!, except: [:index, :show]
@@ -645,21 +650,6 @@ Now, pretty up the forms a bit.
 		    </div>
 		  </div>
 		</div>
-
-===============================
-==== Right Here Right Now =====
-===============================
--Add time. 
--Make it so that after you signup or log back in, you are redirected to the pins index page, not the landing page.  
--Add a restaurant model with a controller, crud actions, views and routes and then connect restaurants to a user pins to a restaurant. 
--
-
--Add a yummy yucky attribute to pins. 
--James - help me find and change the "missing" word on the cards on the pins index page when there is no picture. 
--James - help me find where I change the css so that the image has some padding right it too so it looks like it's in the card. 
--Make the signed in, new pin, signed out notices fade after showing and not change the page also upon refresh. 
--Redo this freaking app 3 times. 
-===============================
 
 Now pretty up the devise acount edit form for editing one's account under: 
 	Under views/devise/registration/edit.html.erb, changed to this:
