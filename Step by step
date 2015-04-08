@@ -23,7 +23,7 @@ Create a new rails app called pin_board that uses postgres db and skips installi
 	rake db:create 
 	rake db:migrate
 
-Make sure file works in browswer: 
+Make sure file works in browser: 
 	cd pin_board
 	rails s
 	In browswer: 
@@ -37,6 +37,10 @@ Check Versions etc:
 	gemset
 	etc
 
+Set up github repo:
+	set up on github 
+	and commit and push on local
+
 Install Gems
 	In Gemfile:
 	gem 'haml', '~> 4.0.6' to gemfile #Don't need this if not going to use haml dsl in the app.
@@ -45,6 +49,8 @@ Install Gems
 	? Better Errors?
 	? minitest-rails?
 	? debugger ? 
+	byebug?
+	annotate for showing tables in console?
 	bundle 
 
 Create a Pin model with a title that's a string and a description that's text: 
@@ -69,7 +75,7 @@ Put all the resources in the routes file as well as make the root path point to 
 	resources :pins
 	root 'pins#index'
 
-Create a new file for the index view: 
+Create an index view: 
 	In app/views/pin create new file called:
 	index.html.erb
 	and put in a simple: 
@@ -124,7 +130,7 @@ Create a form partial for creating a new pin:
 	rails g simple_form:install --bootstrap  
 	In the form partial: 
 	<%= simple_form_for @pin, html: {multipart: true} do |f| %>
-	  <%= if @pin.errors.any?  %>
+	  <% if @pin.errors.any?  %>
 	    <div id="errors"></div>
 	    <h2></h2>
 	    <%= pluralize(@pin.errors.count, "error") %>
@@ -175,8 +181,8 @@ Add a flash message for when a new pin is created:
 	Then at top add following before action: 
 	before_action :find_pin, only: [:show, :edit, :update, :destroy]
 
-Create a view for the show action with a new show file in views/pin: 
-	show.html.erb
+Create a SHOW view: 
+	In views/pins/ create show.html.erb
 	Add following to file: 
 	<h1>
 		<%= @pin.title %>
@@ -229,7 +235,7 @@ Create an edit view:
 
 	Commit
  
-Add a link_to form on the show page like this: 
+Add a link_to on the show page to link to the edit page: 
 	<%= link_to "Edit", edit_pin_path %>
 	Refresh
 	Add code in the destroy action to delete a pin & redirect to main index page: 
@@ -247,10 +253,9 @@ Add a "new" button on the index page:
 	In views/index:
 	<%= link_to "New Pin", new_pin_path %>
 	Refresh
-
 	Commit
 
-Add users by adding the DEVISE gem: 
+Add users with the DEVISE gem: 
 	gem 'devise', '~> 3.3.0'
 	bundle
 	Restart server
@@ -271,7 +276,7 @@ Try a branch here?:
 	With: 
 	git branch -b something...
 	
-Make sure that each pin will be assigned to a user. 
+Link Pins to Users: 
 	Create associations in models pin.rb and user.rb 
 	has_many & belongs_to
 	
@@ -287,7 +292,10 @@ Make sure that each pin will be assigned to a user.
 	@pin.user = @user
 	@pin.save 
 	
-Add code to display the user's email to each pin:
+	In pins_controller, change the @pin.new in both the new and the create actions to: 
+	current_user.pins.build
+
+Display the user's email in each pin:
 	In show.html.erb file: 
 	<p></p>
 	Submitted by
@@ -295,19 +303,16 @@ Add code to display the user's email to each pin:
 	<br/>
 	Refresh and see error cuz we don't have a pin.user.email so: 
 
-Update the code in the pins_controller to attach a pin with a current user: 
-	In pins_controller, change the @pin.new in both the new and the create actions to: 
-	current_user.pins.build
-
-Start BOOTSTRAP stuff here: 
+Add BOOTSTRAP: 
 	Install the gem in Gemfile: 
 	gem 'bootstrap-sass', '3.2.0.2'
 	bundle
 	restart server
+	
 	Follow online documentation and Configure bootstrap:
 	Add .scss to app/assests/stylesheets/application.css  
 
-Add this to the bottom of application.scss file: 
+	Add this to the bottom of application.scss file: 
 	@import "bootstrap-sprockets";
 	@import "bootstrap"; 
 	Refresh to see new styling 
@@ -316,38 +321,39 @@ Add this to the bottom of application.scss file:
 	Refresh
 	Commit
 
-Add navigation to views/layout/application.html.erb file. Below body tag: 
-  <nav class="navbar navbar-default">
-    <div class="container">
-      <div class="navbar-brand">
-        <%= link_to "Pin Board", root_path %>
-      </div>
-      <% if user_signed_in? %>
-        <ul class="nav navbar-nav navbar-right">
-          <li>
-            <%= link_to "New Pin", new_pin_path %>
-          </li>
-          <li>
-            <%= link_to "Account", edit_user_registration_path %>
-          </li>
-          <li>
-            <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
-          </li>
-        </ul>
-      <% else %>
-        <ul class="nav navbar-nav navbar-right">
-          <li>
-            <%= link_to "Sign Up", new_user_registration_path %>
-          </li>
-          <li>
-            <%= link_to "Sign In", new_user_session_path %>
-          </li>
-        </ul>
-      <% end %>
-    </div>
-  </nav>
+Add Nav Bar:
+	To views/layout/application.html.erb file. Below body tag: 
+	<nav class="navbar navbar-default">
+	<div class="container">
+	  <div class="navbar-brand">
+	    <%= link_to "Pin Board", root_path %>
+	  </div>
+	  <% if user_signed_in? %>
+	    <ul class="nav navbar-nav navbar-right">
+	      <li>
+	        <%= link_to "New Pin", new_pin_path %>
+	      </li>
+	      <li>
+	        <%= link_to "Account", edit_user_registration_path %>
+	      </li>
+	      <li>
+	        <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
+	      </li>
+	    </ul>
+	  <% else %>
+	    <ul class="nav navbar-nav navbar-right">
+	      <li>
+	        <%= link_to "Sign Up", new_user_registration_path %>
+	      </li>
+	      <li>
+	        <%= link_to "Sign In", new_user_session_path %>
+	      </li>
+	    </ul>
+	  <% end %>
+	</div>
+	</nav>
      
-Delete this new pin link from the views/pins/index page: 
+	Delete new pin link from the views/pins/index page: 
 	<%= link_to "New Pin", new_pin_path %>
 	since we already have one in the nav now. 
 	refresh
@@ -361,12 +367,13 @@ Add a wrapper around the new & edit forms.
 	Do same thing to edit page.
 	refresh, commit
 
-ADD THE ABILITY TO UPLOAD IMAGES.
+Add Paperclip gem for uploading images:
 	Add paperclip gem:
 	gem 'paperclip', '~> 4.2.0'
 	bundle install and restart server
 	Read paperclip documentation
 	Install imagemagic
+	
 	From the quickstart section in documentation, add the has_attached_file and validates_attachment_content_type to the pin: 
 	Add following to pin.rb (this is copied from paperclip gem but changed for our needs):
 	has_attached_file :image, styles: { :medium => "300x300>" }
@@ -376,7 +383,7 @@ ADD THE ABILITY TO UPLOAD IMAGES.
 	rake db:migrate
 	commit
 
-Add paperclip to form also. 
+	Add image upload link to form: 
 	Under views/pin/_form.html.erb:
 		<div class="form-group">
   			<%= f.input :image, input_html: { class: 'form-control'} %>
@@ -398,7 +405,7 @@ Add paperclip to form also.
 		In edit.html.erb, above = render 'form' add: 
 	   	<%= image_tag @pin.image.url(:medium) %>	
 
-Add the image tag to the pins on the index page:
+	Add the image tag to the pins on the index page:
 	views/index.html.erb, change code to this: 
 		<% @pins.each do |pin| %>
 		  <%= link_to (image_tag pin.image.url(:medium)), pin %>
@@ -407,7 +414,7 @@ Add the image tag to the pins on the index page:
 		  </h2>
 		<% end %>
 
-Put the jquery masonry in place to auto stack things upon resizing screen: 
+Add jquery MASONRY gem to have pins auto stack: 
 	in gemfile, put 
 	gem 'masonry-rails', '~> 0.2.1'
 	and bundle
@@ -442,7 +449,8 @@ Put the jquery masonry in place to auto stack things upon resizing screen:
 	refresh
 	commit
 
-Paste in the styles from this github repo. it's also here. just paste into the bottom of applicatin.css.scss:
+CSS styling:
+	Paste in the styles from this github repo. it's also here. just paste into the bottom of applicatin.css.scss:
 	body {
 		background: #E9E9E9;
 	}
@@ -580,44 +588,6 @@ Style up the show page with various. should look like this:
 	  </div>
 	</div>
 	
-Add the ability to vote on a pin: 
-	Insert acts-as-votable gem: 
-	gem 'acts_as_votable', '~> 0.10.0'
-	bundle install & restart server
-	In documentation, do a migration. 
-	In console: 
-	rake db:migrate
-	Inside of pin model add 
-	acts_as_votable
-	at top. 
-
-Create some nested routes for upvoting: 
-	In routes file, below devise_for, replace resouces :pins with: 
-	resources :pins do
-		member do
-			put "Like", to: "pinsupvote"
-		end
-	end
-	Then in pins_controller, add:
-	:upvote 
-	to the params in brackets of the before_action at the top and add: 
-	def upvote
-		@pin.upvote_by current_user
-		redirect_to :back
-	end
-	below the destroy block.
-
-In show page add a link_to under the last btn-group for upvotes like so: 
-	<div class="btn-group pull-right">
-	  <%= link_to like_pin_path(@pin), method: :put, class: "btn btn-default" do  %>
-	    <span class="glyphicon glyphicon-heart">
-	      <%= @pin.get_upvotes.size %>
-	    </span>
-	  <% end %>
-	</div>
-	Add right below this: 
-	- if user_signed_in?
-
 Add a welcome page and make it the index: 
 	In views/pins/ create a welcome.html.erb page. 
 	Put a simple "Welcome to Yummy Yucky" on it. 
@@ -631,12 +601,13 @@ Add a link on the navbar to take you to the pins index page:
 
 Make it so that after signing in, you land on the pins index page instead of the welcome page. 
 	
-Add authenticate so users who aren't signed in can't do anything. below the first before_action in the pins_controller, add: 
+Add authentication so users who aren't signed in can't do anything:
+	below the first before_action in the pins_controller, add: 
 	before_action :authenticate_user!, except: [:index, :show]
 	Test in an in congnito window and should see that you can't do stuff. 
 
-Now, pretty up the forms a bit. 
-	Add this to the new form so it looks like this: 
+Bootstrapify the forms:
+	Update the new form to look like this: 
 		<div class="col-md-8 col-md-offset-2">
 		  <div class="row">
 		    <div class="panel panel-default">
@@ -650,9 +621,10 @@ Now, pretty up the forms a bit.
 		    </div>
 		  </div>
 		</div>
+	refresh, commit
 
-Now pretty up the devise acount edit form for editing one's account under: 
-	Under views/devise/registration/edit.html.erb, changed to this:
+	Bootstrapify devise's Edit Account Info form:
+	Under views/devise/registration/edit.html.erb, change to this:
 	<div class="col-md-8 col-md-offset-2">
 	  <div class="row">
 	    <div class="panel panel-default">
@@ -705,7 +677,10 @@ Now pretty up the devise acount edit form for editing one's account under:
 	  </div>
 	</div>
 
-Now pretty up the sign up page in devise/sessions/new with: 
+	refresh, commit
+
+	Now Bootstrapify up the sign up page:
+	In devise/sessions/new with: 
 	<div class="col-md-8 col-md-offset-2">
 	  <div class="row">
 	    <div class="panel panel-default">
@@ -741,8 +716,10 @@ Now pretty up the sign up page in devise/sessions/new with:
 			</div>
 		</div>
 	</div>
+
+	refresh, commit
 	
-Pretty up sign in page in devise/sessions/new with:  
+	Bootstrapify the sign_in page in devise/sessions/new with:  
 	<div class="col-md-8 col-md-offset-2">
 	  <div class="row">
 	    <div class="panel panel-default">
@@ -778,10 +755,11 @@ Pretty up sign in page in devise/sessions/new with:
 			</div>
 		</div>
 	</div>
+
+	refresh, commit
 
 
 ------End of regular------
-
 
       LOG TIME  ! ! !  ! !
 
