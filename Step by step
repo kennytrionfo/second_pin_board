@@ -36,7 +36,9 @@ Check Versions etc:
 	rvm info
 	gemset
 	etc
-
+Set up repo:
+	On github, set up repo with same name and follow instructions. 
+	
 Install Gems
 	In Gemfile:
 	gem 'haml', '~> 4.0.6' to gemfile #Don't need this if not going to use haml dsl in the app.
