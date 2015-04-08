@@ -36,11 +36,17 @@ Check Versions etc:
 	rvm info
 	gemset
 	etc
+<<<<<<< HEAD
 
 Set up github repo:
 	set up on github 
 	and commit and push on local
 
+=======
+Set up repo:
+	On github, set up repo with same name and follow instructions. 
+	
+>>>>>>> 67512ed28aef82915a8fa8eb1a71fd656258f072
 Install Gems
 	In Gemfile:
 	gem 'haml', '~> 4.0.6' to gemfile #Don't need this if not going to use haml dsl in the app.
